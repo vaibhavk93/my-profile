@@ -1,0 +1,1313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vaibhav Kumawat — Product Leader</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0f14;
+    --surface: #13161e;
+    --surface2: #1a1e28;
+    --border: #252a38;
+    --gold: #c9a84c;
+    --gold-light: #e2c47a;
+    --gold-dim: rgba(201,168,76,0.15);
+    --text: #e8e4d9;
+    --text-muted: #7a8090;
+    --text-dim: #4a5060;
+    --accent: #3d7fff;
+    --red: #e05c5c;
+    --green: #4ecb8d;
+    --white: #ffffff;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; font-size: 16px; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 4rem;
+    background: rgba(13,15,20,0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 0.02em;
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex; gap: 2.5rem; list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+    cursor: pointer;
+  }
+
+  .nav-links a:hover, .nav-links a.active { color: var(--gold); }
+
+  /* ─── SECTIONS ─── */
+  section { display: none; min-height: 100vh; }
+  section.active { display: block; }
+
+  /* ─── HERO ─── */
+  #home {
+    padding: 10rem 4rem 6rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-noise {
+    position: absolute; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    opacity: 0.4;
+  }
+
+  .hero-grid-lines {
+    position: absolute; inset: 0; pointer-events: none;
+    background-image:
+      linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px);
+    background-size: 80px 80px;
+  }
+
+  .hero-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+
+  .hero-tag::before {
+    content: '';
+    display: inline-block;
+    width: 2rem; height: 1px;
+    background: var(--gold);
+  }
+
+  .hero-name {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3.5rem, 7vw, 6.5rem);
+    font-weight: 900;
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    color: var(--white);
+    margin-bottom: 0.5rem;
+  }
+
+  .hero-name span { color: var(--gold); }
+
+  .hero-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 1rem;
+    color: var(--text-muted);
+    margin-bottom: 2.5rem;
+    letter-spacing: 0.05em;
+  }
+
+  .hero-desc {
+    max-width: 580px;
+    font-size: 1.1rem;
+    color: var(--text);
+    line-height: 1.8;
+    margin-bottom: 3rem;
+    font-weight: 300;
+  }
+
+  .hero-stats {
+    display: flex; gap: 3rem; margin-bottom: 3rem;
+    flex-wrap: wrap;
+  }
+
+  .stat-item { display: flex; flex-direction: column; }
+  .stat-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .stat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-top: 0.3rem;
+  }
+
+  .hero-cta {
+    display: flex; gap: 1.2rem; flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.85rem 2rem;
+    background: var(--gold);
+    color: #0d0f14;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none; cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+  .btn-outline {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.85rem 2rem;
+    background: transparent;
+    color: var(--text-muted);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: 1px solid var(--border); cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+    text-decoration: none;
+  }
+
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+  .hero-right {
+    position: absolute; right: 4rem; top: 50%;
+    transform: translateY(-50%);
+    display: flex; flex-direction: column; gap: 1.2rem;
+    align-items: flex-end;
+  }
+
+  .skill-chip {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.4rem 1rem;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    background: var(--surface);
+    transition: all 0.2s;
+  }
+
+  .skill-chip.highlight {
+    border-color: var(--gold-dim);
+    color: var(--gold);
+    background: var(--gold-dim);
+  }
+
+  /* ─── ABOUT / TIMELINE ─── */
+  #about { padding: 8rem 4rem 6rem; }
+
+  .section-header {
+    margin-bottom: 4rem;
+  }
+
+  .section-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.8rem;
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+
+  .section-tag::before {
+    content: '';
+    display: inline-block;
+    width: 1.5rem; height: 1px;
+    background: var(--gold);
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.15;
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .about-text {
+    font-size: 1rem;
+    line-height: 1.9;
+    color: var(--text);
+  }
+
+  .about-text p { margin-bottom: 1.4rem; }
+
+  .about-text strong { color: var(--gold); font-weight: 500; }
+
+  /* Timeline */
+  .timeline { position: relative; padding-left: 2rem; }
+
+  .timeline::before {
+    content: '';
+    position: absolute; left: 0; top: 0; bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--gold), var(--border), transparent);
+  }
+
+  .tl-item {
+    position: relative;
+    margin-bottom: 2.8rem;
+    padding-left: 2rem;
+  }
+
+  .tl-item::before {
+    content: '';
+    position: absolute; left: -2.3rem; top: 0.45rem;
+    width: 0.5rem; height: 0.5rem;
+    border-radius: 50%;
+    background: var(--gold);
+    border: 2px solid var(--bg);
+    box-shadow: 0 0 8px var(--gold);
+  }
+
+  .tl-year {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.3rem;
+  }
+
+  .tl-role {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 0.2rem;
+  }
+
+  .tl-org {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 0.6rem;
+    font-family: 'DM Mono', monospace;
+  }
+
+  .tl-desc {
+    font-size: 0.9rem;
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  .tl-tags {
+    display: flex; flex-wrap: wrap; gap: 0.4rem;
+    margin-top: 0.8rem;
+  }
+
+  .tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.65rem;
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+  }
+
+  .tag.gold { border-color: var(--gold-dim); color: var(--gold); background: var(--gold-dim); }
+
+  /* ─── WORK / IMPACT ─── */
+  #work { padding: 8rem 4rem 6rem; }
+
+  .work-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 4rem;
+  }
+
+  .work-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.25s, transform 0.2s;
+  }
+
+  .work-card:hover {
+    border-color: var(--gold);
+    transform: translateY(-3px);
+  }
+
+  .work-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+
+  .work-card:hover::before { opacity: 1; }
+
+  .card-icon {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 0.5rem;
+  }
+
+  .card-subtitle {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.8rem;
+  }
+
+  .card-desc {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 1.2rem;
+  }
+
+  .card-metrics {
+    display: flex; flex-direction: column; gap: 0.4rem;
+  }
+
+  .metric {
+    display: flex; align-items: center; gap: 0.6rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--text-dim);
+  }
+
+  .metric::before {
+    content: '→';
+    color: var(--gold);
+    font-size: 0.7rem;
+  }
+
+  .metric strong { color: var(--text); }
+
+  /* Impact bar */
+  .impact-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 3rem;
+    margin-top: 2rem;
+  }
+
+  .impact-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 2rem;
+  }
+
+  .impact-row {
+    display: grid;
+    grid-template-columns: 160px 1fr auto;
+    gap: 1.5rem;
+    align-items: center;
+    margin-bottom: 1.2rem;
+  }
+
+  .impact-label {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+  }
+
+  .impact-bar-wrap {
+    height: 4px;
+    background: var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .impact-bar {
+    position: absolute; left: 0; top: 0; height: 100%;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light));
+    transition: width 1s ease;
+  }
+
+  .impact-val {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--gold);
+    white-space: nowrap;
+    text-align: right;
+    min-width: 120px;
+  }
+
+  /* ─── AI DEMOS ─── */
+  #demos { padding: 8rem 4rem 6rem; }
+
+  .demos-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+
+  .demo-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 2.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.25s;
+  }
+
+  .demo-card:hover { border-color: var(--gold); }
+
+  .demo-card.coming-soon {
+    opacity: 0.6;
+  }
+
+  .demo-status {
+    position: absolute; top: 1.5rem; right: 1.5rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.7rem;
+    border-radius: 0;
+  }
+
+  .status-live {
+    background: rgba(78,203,141,0.15);
+    border: 1px solid rgba(78,203,141,0.3);
+    color: var(--green);
+  }
+
+  .status-building {
+    background: rgba(201,168,76,0.1);
+    border: 1px solid rgba(201,168,76,0.25);
+    color: var(--gold);
+  }
+
+  .status-planned {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+  }
+
+  .demo-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .demo-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 0.4rem;
+  }
+
+  .demo-tagline {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .demo-desc {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+
+  .demo-stack {
+    display: flex; flex-wrap: wrap; gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .stack-pill {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.7rem;
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+  }
+
+  .demo-link {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    text-decoration: none;
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    transition: gap 0.2s;
+  }
+
+  .demo-link:hover { gap: 0.8rem; }
+
+  .demos-note {
+    margin-top: 3rem;
+    padding: 1.5rem 2rem;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.03em;
+    line-height: 1.7;
+  }
+
+  /* ─── CONTACT ─── */
+  #contact { padding: 8rem 4rem 6rem; }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .contact-left h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+  }
+
+  .contact-left p {
+    font-size: 1rem;
+    color: var(--text-muted);
+    line-height: 1.8;
+    margin-bottom: 2.5rem;
+  }
+
+  .contact-channels {
+    display: flex; flex-direction: column; gap: 1.2rem;
+  }
+
+  .channel {
+    display: flex; align-items: center; gap: 1.2rem;
+    padding: 1.2rem 1.5rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    text-decoration: none;
+    transition: border-color 0.2s;
+  }
+
+  .channel:hover { border-color: var(--gold); }
+
+  .channel-icon {
+    font-size: 1.2rem;
+    width: 2.5rem; text-align: center;
+  }
+
+  .channel-info { flex: 1; }
+
+  .channel-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 0.2rem;
+  }
+
+  .channel-value {
+    font-size: 0.9rem;
+    color: var(--text);
+  }
+
+  /* Contact form */
+  .contact-form {
+    display: flex; flex-direction: column; gap: 1.2rem;
+  }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+
+  .form-group label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 0.85rem 1rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.2s;
+    resize: vertical;
+    appearance: none;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus {
+    border-color: var(--gold);
+  }
+
+  .form-group textarea { min-height: 120px; }
+
+  .form-group select option { background: var(--surface); }
+
+  .form-submit {
+    align-self: flex-start;
+    padding: 0.9rem 2.5rem;
+    background: var(--gold);
+    color: #0d0f14;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: none; cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .form-submit:hover { background: var(--gold-light); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    padding: 2rem 4rem;
+    border-top: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 1rem;
+  }
+
+  .footer-left {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    letter-spacing: 0.08em;
+  }
+
+  .footer-left span { color: var(--gold); }
+
+  .footer-right {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--text-dim);
+    letter-spacing: 0.08em;
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes shimmer {
+    from { background-position: -200% center; }
+    to { background-position: 200% center; }
+  }
+
+  .fade-up {
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards;
+  }
+
+  .fade-up:nth-child(1) { animation-delay: 0.1s; }
+  .fade-up:nth-child(2) { animation-delay: 0.2s; }
+  .fade-up:nth-child(3) { animation-delay: 0.3s; }
+  .fade-up:nth-child(4) { animation-delay: 0.4s; }
+  .fade-up:nth-child(5) { animation-delay: 0.5s; }
+  .fade-up:nth-child(6) { animation-delay: 0.6s; }
+
+  .gold-shimmer {
+    background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer 3s linear infinite;
+  }
+
+  /* ─── DIVIDER ─── */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+    margin: 2rem 0;
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 1024px) {
+    nav { padding: 1rem 2rem; }
+    #home, #about, #work, #demos, #contact { padding-left: 2rem; padding-right: 2rem; }
+    .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .work-grid { grid-template-columns: 1fr 1fr; }
+    .hero-right { display: none; }
+    .impact-row { grid-template-columns: 120px 1fr auto; }
+  }
+
+  @media (max-width: 640px) {
+    .nav-links { gap: 1.2rem; }
+    .nav-links a { font-size: 0.65rem; }
+    .work-grid, .demos-grid { grid-template-columns: 1fr; }
+    .hero-stats { gap: 1.5rem; }
+    .form-row { grid-template-columns: 1fr; }
+    .impact-row { grid-template-columns: 1fr; gap: 0.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" onclick="showSection('home')" style="cursor:pointer">VK</a>
+  <ul class="nav-links">
+    <li><a onclick="showSection('home')" id="nav-home" class="active">Home</a></li>
+    <li><a onclick="showSection('about')" id="nav-about">About</a></li>
+    <li><a onclick="showSection('work')" id="nav-work">Work</a></li>
+    <li><a onclick="showSection('demos')" id="nav-demos">AI Demos</a></li>
+    <li><a onclick="showSection('contact')" id="nav-contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ═══════════════════════ HOME ═══════════════════════ -->
+<section id="home" class="active">
+  <div class="hero-noise"></div>
+  <div class="hero-grid-lines"></div>
+
+  <div class="hero-tag fade-up">Senior Product Manager</div>
+
+  <div class="hero-name fade-up">Vaibhav<br><span>Kumawat</span></div>
+  <div class="hero-title fade-up">Discovery · Platform · AI Products</div>
+
+  <p class="hero-desc fade-up">
+    I build products that scale. Six years shipping at 100M+ users — from search infrastructure that became
+    <strong style="color:var(--gold)">#2 transaction driver</strong> platform-wide, to AI pipelines that cut translation costs by 75%, to SDK platforms
+    that compressed GTM from 10 days to 4 hours.
+  </p>
+
+  <div class="hero-stats fade-up">
+    <div class="stat-item">
+      <span class="stat-value">2M</span>
+      <span class="stat-label">Search DAU</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-value">100M+</span>
+      <span class="stat-label">User Scale</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-value">₹18Cr</span>
+      <span class="stat-label">Monthly Revenue</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-value">96%</span>
+      <span class="stat-label">GTM Reduction</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-value">20+</span>
+      <span class="stat-label">Cross-Func Teams</span>
+    </div>
+  </div>
+
+  <div class="hero-cta fade-up">
+    <button class="btn-primary" onclick="showSection('work')">View Work →</button>
+    <button class="btn-outline" onclick="showSection('contact')">Get in Touch</button>
+  </div>
+
+  <div class="hero-right">
+    <div class="skill-chip highlight">Search & Discovery</div>
+    <div class="skill-chip">Platform / SDK</div>
+    <div class="skill-chip highlight">AI / LLM Products</div>
+    <div class="skill-chip">Behavioral Design</div>
+    <div class="skill-chip">Market Expansion</div>
+    <div class="skill-chip highlight">Cross-Func Leadership</div>
+    <div class="skill-chip">CRO & Experimentation</div>
+    <div class="skill-chip">Accessibility</div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ ABOUT ═══════════════════════ -->
+<section id="about">
+  <div class="section-header">
+    <div class="section-tag">Background</div>
+    <h2 class="section-title">The path from<br>engineer to product leader</h2>
+  </div>
+
+  <div class="about-grid">
+    <div class="about-text fade-up">
+      <p>
+        I started as a <strong>Chemical Engineer from IIT Bombay</strong> — which meant I learned to think in systems, constraints, and failure modes before I ever wrote a line of code. I pivoted to software engineering, then to product management after completing my <strong>MBA from IIM Indore</strong>.
+      </p>
+      <p>
+        At <strong>Paytm</strong>, I've spent six years building at a scale that most PMs only read about. I've owned the surfaces that 100 million users interact with daily — homepage, search, flyout, profile, SDK platform, localization, accessibility, and the web.
+      </p>
+      <p>
+        My edge: I think in <strong>architecture driven by failure modes</strong>. Every layer I've added to a system was added because something broke, not because it looked good on a roadmap. That discipline — from the AI localization pipeline's dual-LLM design to Universal Search's SDK-first approach — is what makes my work hold up at scale.
+      </p>
+      <p>
+        Currently exploring <strong>Senior/Principal PM opportunities</strong> in AI products, platform/SDK, and consumer fintech globally. I'm also building AI-native tools as side projects, grounding my PM thinking in what it actually takes to ship.
+      </p>
+      <div class="divider"></div>
+      <div style="display:flex; gap:2rem; flex-wrap:wrap;">
+        <div>
+          <div class="section-tag" style="margin-bottom:0.5rem">Education</div>
+          <div style="font-size:0.9rem; color:var(--text)">MBA · IIM Indore · 2019–21</div>
+          <div style="font-size:0.9rem; color:var(--text-muted); margin-top:0.3rem">B.Tech · IIT Bombay · 2012–16</div>
+        </div>
+        <div>
+          <div class="section-tag" style="margin-bottom:0.5rem">Domain Expertise</div>
+          <div style="font-size:0.9rem; color:var(--text)">Fintech · Consumer · Platform</div>
+          <div style="font-size:0.9rem; color:var(--text-muted); margin-top:0.3rem">AI/LLM · Search · SDK</div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-tag" style="margin-bottom:1.5rem">Career Timeline</div>
+      <div class="timeline">
+        <div class="tl-item fade-up">
+          <div class="tl-year">Jul 2021 — Present</div>
+          <div class="tl-role">Senior Product Manager</div>
+          <div class="tl-org">Paytm · Mumbai</div>
+          <div class="tl-desc">Led 8 high-impact product surfaces at 100M+ user scale. Owned search (2M DAU), homepage engagement, SDK platform powering 3 apps, AI localization pipeline, accessibility, and more.</div>
+          <div class="tl-tags">
+            <span class="tag gold">Discovery</span>
+            <span class="tag gold">Platform</span>
+            <span class="tag gold">AI/LLM</span>
+            <span class="tag">B2C</span>
+            <span class="tag">SDK</span>
+          </div>
+        </div>
+
+        <div class="tl-item fade-up">
+          <div class="tl-year">2019 — 2021</div>
+          <div class="tl-role">MBA</div>
+          <div class="tl-org">IIM Indore</div>
+          <div class="tl-desc">Full-time MBA. Strategy, finance, operations. Transitioned into product management with a systems thinking foundation from engineering.</div>
+          <div class="tl-tags">
+            <span class="tag">Strategy</span>
+            <span class="tag">Operations</span>
+          </div>
+        </div>
+
+        <div class="tl-item fade-up">
+          <div class="tl-year">Dec 2017 — Jul 2018</div>
+          <div class="tl-role">Software Engineer</div>
+          <div class="tl-org">Viral Technologies (BillDesk)</div>
+          <div class="tl-desc">Built admin portal for merchant management and transaction validation for BharatKosh. Led team of 5 developers. Received letter of appreciation for rapid delivery.</div>
+          <div class="tl-tags">
+            <span class="tag">Fintech</span>
+            <span class="tag">Engineering</span>
+          </div>
+        </div>
+
+        <div class="tl-item fade-up">
+          <div class="tl-year">Jun 2016 — Dec 2017</div>
+          <div class="tl-role">Software Architect</div>
+          <div class="tl-org">C2LBIZ</div>
+          <div class="tl-desc">Digitized end-to-end insurance journeys for Sun Life (HK) and FWD (Vietnam). Increased sales conversion 19%, agent efficiency 14% through smart search and policy automation.</div>
+          <div class="tl-tags">
+            <span class="tag">Insurtech</span>
+            <span class="tag">Architecture</span>
+          </div>
+        </div>
+
+        <div class="tl-item fade-up">
+          <div class="tl-year">2012 — 2016</div>
+          <div class="tl-role">B.Tech, Chemical Engineering</div>
+          <div class="tl-org">IIT Bombay</div>
+          <div class="tl-desc">Systems thinking, process optimization, and constraint-driven design — foundations that shaped how I approach product architecture.</div>
+          <div class="tl-tags">
+            <span class="tag">Systems Thinking</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ WORK ═══════════════════════ -->
+<section id="work">
+  <div class="section-header">
+    <div class="section-tag">Product Portfolio</div>
+    <h2 class="section-title">Shipped. Scaled. Measured.</h2>
+  </div>
+
+  <div class="work-grid">
+
+    <div class="work-card fade-up">
+      <div class="card-icon">🔍</div>
+      <div class="card-subtitle">Search & Discovery</div>
+      <div class="card-title">Universal Search</div>
+      <div class="card-desc">Cross-vertical search platform built from 0→1, now the #2 transaction driver across Paytm's 20+ verticals. Industry pioneer for search in Indian fintech super-apps.</div>
+      <div class="card-metrics">
+        <div class="metric"><strong>2M DAU</strong> · 15M MAU · 500M+ monthly searches</div>
+        <div class="metric"><strong>#2 transaction driver</strong> platform-wide</div>
+        <div class="metric">GTM <strong>10 days → 4 hours</strong> via SDK integration</div>
+        <div class="metric"><strong>15 verticals</strong> · 25,000+ discoverable products</div>
+      </div>
+    </div>
+
+    <div class="work-card fade-up">
+      <div class="card-icon">🏠</div>
+      <div class="card-subtitle">Engagement Design</div>
+      <div class="card-title">Homepage & Engagement</div>
+      <div class="card-desc">Behavioral design across Paytm's highest-traffic surface. Architected the Curvy Theme redesign, Dark Mode, OCD widget (Zeigarnik effect), and lifecycle personalization.</div>
+      <div class="card-metrics">
+        <div class="metric">Bounce rate <strong>18% → 12.5%</strong> (31% reduction)</div>
+        <div class="metric">Session stickiness <strong>+40%</strong> via OCD framework</div>
+        <div class="metric"><strong>25.7M daily unique visitors</strong></div>
+      </div>
+    </div>
+
+    <div class="work-card fade-up">
+      <div class="card-icon">🌍</div>
+      <div class="card-subtitle">AI / LLM Products</div>
+      <div class="card-title">AI Localization Pipeline</div>
+      <div class="card-desc">Dual-LLM architecture (translator at 0.7 temp, evaluator at 0.2) with feedback loops and max-3-retry logic. Replaced manual translation post-RBI cost mandate in 10 weeks.</div>
+      <div class="card-metrics">
+        <div class="metric">Cost <strong>₹6L → ₹1.5L/month</strong> (75% reduction)</div>
+        <div class="metric">TAT <strong>3 days → &lt;2 minutes</strong></div>
+        <div class="metric">Accuracy <strong>30% → 95%</strong> via prompt engineering</div>
+        <div class="metric">Coverage <strong>45% → 98%</strong> · 12 languages</div>
+      </div>
+    </div>
+
+    <div class="work-card fade-up">
+      <div class="card-icon">📱</div>
+      <div class="card-subtitle">Platform / SDK</div>
+      <div class="card-title">H5 SDK Platform</div>
+      <div class="card-desc">Multi-app SDK infrastructure powering Paytm, Paytm Money, and Paytm for Business. 50+ standardized widgets, ads monetization framework, A/B-tested Story & Video Widgets.</div>
+      <div class="card-metrics">
+        <div class="metric"><strong>3 apps</strong> · 10+ verticals · 20+ monthly campaigns</div>
+        <div class="metric">GTM <strong>96% faster</strong> (10 days → 4 hours)</div>
+        <div class="metric">Video widgets <strong>+26% engagement</strong> lift</div>
+      </div>
+    </div>
+
+    <div class="work-card fade-up">
+      <div class="card-icon">👤</div>
+      <div class="card-subtitle">0→1 Product</div>
+      <div class="card-title">User Profile & Personalization</div>
+      <div class="card-desc">Built Paytm's first user attribute platform from scratch. Designed attribute gathering flows, segmentation framework, and DPDP Act compliance — unlocking ad monetization.</div>
+      <div class="card-metrics">
+        <div class="metric"><strong>₹8 Cr/month</strong> ad revenue (from 0)</div>
+        <div class="metric"><strong>1.5M users</strong> onboarded</div>
+        <div class="metric"><strong>25% conversion lift</strong> on personalized journeys</div>
+      </div>
+    </div>
+
+    <div class="work-card fade-up">
+      <div class="card-icon">♿</div>
+      <div class="card-subtitle">Org-Wide Initiative</div>
+      <div class="card-title">Accessibility & Localization</div>
+      <div class="card-desc">Led Paytm Accessibility Guidelines creation (AA standard). Resolved 1,800+ issues across app. Hinglish rollout across 20+ teams unlocked 80K DAU in tier 2/3 markets.</div>
+      <div class="card-metrics">
+        <div class="metric">Accessibility <strong>18% → 75%</strong> coverage</div>
+        <div class="metric"><strong>80K Hinglish DAU</strong> · tier 2/3 unlock</div>
+        <div class="metric"><strong>150+ QA members</strong> · 20 product teams</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Impact Summary Bar -->
+  <div class="impact-section">
+    <div class="impact-title">// Cumulative Impact at a Glance</div>
+
+    <div class="impact-row">
+      <div class="impact-label">Revenue Impact</div>
+      <div class="impact-bar-wrap"><div class="impact-bar" style="width:90%"></div></div>
+      <div class="impact-val">₹18 Cr / month</div>
+    </div>
+    <div class="impact-row">
+      <div class="impact-label">User Scale</div>
+      <div class="impact-bar-wrap"><div class="impact-bar" style="width:95%"></div></div>
+      <div class="impact-val">100M+ users</div>
+    </div>
+    <div class="impact-row">
+      <div class="impact-label">Engagement Lift</div>
+      <div class="impact-bar-wrap"><div class="impact-bar" style="width:60%"></div></div>
+      <div class="impact-val">+40% stickiness</div>
+    </div>
+    <div class="impact-row">
+      <div class="impact-label">GTM Speed</div>
+      <div class="impact-bar-wrap"><div class="impact-bar" style="width:96%"></div></div>
+      <div class="impact-val">96% reduction</div>
+    </div>
+    <div class="impact-row">
+      <div class="impact-label">Cost Saved</div>
+      <div class="impact-bar-wrap"><div class="impact-bar" style="width:75%"></div></div>
+      <div class="impact-val">75% (localization)</div>
+    </div>
+    <div class="impact-row">
+      <div class="impact-label">AI Accuracy Gain</div>
+      <div class="impact-bar-wrap"><div class="impact-bar" style="width:95%"></div></div>
+      <div class="impact-val">30% → 95%</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ AI DEMOS ═══════════════════════ -->
+<section id="demos">
+  <div class="section-header">
+    <div class="section-tag">AI Products & Demos</div>
+    <h2 class="section-title">Building beyond the day job</h2>
+  </div>
+
+  <div class="demos-grid">
+
+    <div class="demo-card fade-up">
+      <div class="demo-status status-building">Building</div>
+      <div class="demo-icon">💰</div>
+      <div class="demo-name">Find Skills</div>
+      <div class="demo-tagline">B2C AI Finance App</div>
+      <div class="demo-desc">
+        Helps everyday users understand their financial health, identify skill gaps for career advancement, and surface actionable micro-opportunities. Built as a PM learning exercise — designing the product architecture, user flows, and LLM integration, not just the idea.
+      </div>
+      <div class="demo-stack">
+        <span class="stack-pill">LLM</span>
+        <span class="stack-pill">B2C</span>
+        <span class="stack-pill">Fintech</span>
+        <span class="stack-pill">AI UX</span>
+      </div>
+      <span class="demo-link">In progress — details coming soon →</span>
+    </div>
+
+    <div class="demo-card fade-up">
+      <div class="demo-status status-planned">Planned</div>
+      <div class="demo-icon">🌐</div>
+      <div class="demo-name">Localization Playground</div>
+      <div class="demo-tagline">Live demo of dual-LLM translation</div>
+      <div class="demo-desc">
+        A stripped-down, interactive version of the AI localization pipeline I built at Paytm. Enter any English UI string, see it run through translator + evaluator LLMs, observe the confidence score, and understand why it passes or gets flagged. Architecture transparency as a feature.
+      </div>
+      <div class="demo-stack">
+        <span class="stack-pill">Dual-LLM</span>
+        <span class="stack-pill">Translation</span>
+        <span class="stack-pill">Prompt Eng.</span>
+        <span class="stack-pill">12 Languages</span>
+      </div>
+      <span class="demo-link">Coming soon →</span>
+    </div>
+
+    <div class="demo-card fade-up">
+      <div class="demo-status status-planned">Planned</div>
+      <div class="demo-icon">🔍</div>
+      <div class="demo-name">Search Quality Scorer</div>
+      <div class="demo-tagline">PM tool for search product evaluation</div>
+      <div class="demo-desc">
+        A tool for PMs and search engineers to evaluate search result quality across dimensions: relevance, intent match, ranking fairness, and coverage. Born from lessons building Universal Search at Paytm — the metrics that actually matter rarely show up in dashboards by default.
+      </div>
+      <div class="demo-stack">
+        <span class="stack-pill">Search</span>
+        <span class="stack-pill">Evaluation</span>
+        <span class="stack-pill">PM Tooling</span>
+      </div>
+      <span class="demo-link">Concept phase →</span>
+    </div>
+
+    <div class="demo-card fade-up">
+      <div class="demo-status status-planned">Planned</div>
+      <div class="demo-icon">📊</div>
+      <div class="demo-name">PM Case Simulator</div>
+      <div class="demo-tagline">AI-powered product interview prep</div>
+      <div class="demo-desc">
+        An AI interviewer that runs structured PM case interviews — product design, metrics, trade-off decisions — with real-time feedback on your reasoning, not just your answer. Modeled on the frameworks I use to think through product problems.
+      </div>
+      <div class="demo-stack">
+        <span class="stack-pill">AI Interview</span>
+        <span class="stack-pill">PM Prep</span>
+        <span class="stack-pill">Evaluation</span>
+      </div>
+      <span class="demo-link">Concept phase →</span>
+    </div>
+
+  </div>
+
+  <div class="demos-note fade-up">
+    // I'm not building demos to showcase tool usage — I'm building them to practice shipping. Each project has a defined MVP scope, a deployment target, and a success metric before I start. Demos will be linked here when live.
+  </div>
+</section>
+
+<!-- ═══════════════════════ CONTACT ═══════════════════════ -->
+<section id="contact">
+  <div class="contact-grid">
+    <div class="contact-left fade-up">
+      <div class="section-tag">Get in Touch</div>
+      <h2>Let's build something<br><span class="gold-shimmer">worth shipping</span></h2>
+      <p>
+        I'm open to conversations about senior/principal PM roles — particularly in AI products, platform/SDK, and consumer fintech. Preference for fully remote roles globally. Also happy to connect on product thinking, AI pipeline architecture, or anything search-and-discovery related.
+      </p>
+
+      <div class="contact-channels">
+        <a class="channel" href="mailto:v.kumawat3@gmail.com">
+          <div class="channel-icon">✉️</div>
+          <div class="channel-info">
+            <div class="channel-label">Email</div>
+            <div class="channel-value">v.kumawat3@gmail.com</div>
+          </div>
+        </a>
+        <a class="channel" href="tel:+919769474574">
+          <div class="channel-icon">📱</div>
+          <div class="channel-info">
+            <div class="channel-label">Phone</div>
+            <div class="channel-value">+91 9769 474 574</div>
+          </div>
+        </a>
+        <a class="channel" href="https://linkedin.com/in/vaibhavkumawat" target="_blank">
+          <div class="channel-icon">💼</div>
+          <div class="channel-info">
+            <div class="channel-label">LinkedIn</div>
+            <div class="channel-value">linkedin.com/in/vaibhavkumawat</div>
+          </div>
+        </a>
+      </div>
+
+      <div style="margin-top:2rem; padding:1.2rem 1.5rem; border:1px solid var(--border); background:var(--surface);">
+        <div class="section-tag" style="margin-bottom:0.5rem">Currently</div>
+        <div style="font-size:0.88rem; color:var(--text-muted); line-height:1.7;">
+          Senior PM at Paytm · Mumbai, India<br>
+          Open to: Senior/Principal PM · Global Remote · AI · Platform · Fintech
+        </div>
+      </div>
+    </div>
+
+    <div class="fade-up">
+      <div class="section-tag" style="margin-bottom:1.5rem">Send a Message</div>
+      <div class="contact-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Name</label>
+            <input type="text" placeholder="Your name">
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" placeholder="your@email.com">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Reason for reaching out</label>
+          <select>
+            <option value="">Select a topic</option>
+            <option>Job opportunity / role</option>
+            <option>Consulting / advisory</option>
+            <option>Product collaboration</option>
+            <option>AI project / demo</option>
+            <option>Just saying hi</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Company / Organization</label>
+          <input type="text" placeholder="Where are you from?">
+        </div>
+        <div class="form-group">
+          <label>Message</label>
+          <textarea placeholder="What's on your mind?"></textarea>
+        </div>
+        <button class="form-submit" onclick="handleFormSubmit()">Send Message →</button>
+        <div id="form-msg" style="font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--green);display:none;margin-top:0.5rem;">
+          ✓ Message noted. I'll get back to you shortly.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-left">
+    <span>Vaibhav Kumawat</span> · Senior Product Manager · Mumbai, India
+  </div>
+  <div class="footer-right">
+    IIT Bombay · IIM Indore · Paytm
+  </div>
+</footer>
+
+<script>
+  function showSection(id) {
+    document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    document.getElementById('nav-' + id).classList.add('active');
+    window.scrollTo(0, 0);
+  }
+
+  function handleFormSubmit() {
+    const msg = document.getElementById('form-msg');
+    msg.style.display = 'block';
+    setTimeout(() => { msg.style.display = 'none'; }, 4000);
+  }
+
+  // Animate impact bars on work section view
+  document.getElementById('nav-work').addEventListener('click', () => {
+    setTimeout(() => {
+      document.querySelectorAll('.impact-bar').forEach(bar => {
+        const w = bar.style.width;
+        bar.style.width = '0';
+        requestAnimationFrame(() => {
+          bar.style.transition = 'width 1.2s ease';
+          bar.style.width = w;
+        });
+      });
+    }, 200);
+  });
+</script>
+
+</body>
+</html>
