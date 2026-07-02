@@ -1,0 +1,157 @@
+---
+import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.order);
+
+const chips = [
+  { value: '2M', label: 'DAU — universal search' },
+  { value: '$2.2M', label: '/mo revenue unlocked' },
+  { value: '96%', label: 'faster GTM — SDK platform' },
+  { value: '100M+', label: 'users — surfaces owned' },
+];
+---
+<Base
+  title="Vaibhav Kumawat — Senior Product Manager · Search, Platforms & AI"
+  description="Senior PM at Paytm building search, platform SDKs, and AI products at 100M-user scale. Universal search to 2M DAU, dual-LLM localization cutting costs 75%, SDK platform compressing GTM by 96%."
+>
+  <!-- HERO -->
+  <section id="hero" class="wrap pt-16 pb-20 md:pt-24">
+    <h1 class="display" style="font-size:var(--fs-display); line-height:1.05">
+      <span class="line-mask"><span>Vaibhav Kumawat</span></span>
+    </h1>
+    <p class="mt-4" style="font-size:var(--fs-h3); color:var(--text-on-ink-muted); font-family:'Inter Variable',sans-serif">
+      <span class="line-mask"><span style="transition-delay:90ms">Senior Product Manager — Search, Platforms &amp; AI at 100M-user scale</span></span>
+    </p>
+    <p class="mt-8 max-w-2xl reveal">
+      I build products that scale. Six years shipping at 100M+ users — from search infrastructure that became the
+      #2 transaction driver platform-wide, to AI pipelines that cut translation costs by 75%, to SDK platforms
+      that compressed go-to-market from 10 days to 4 hours.
+    </p>
+    <div class="mt-8 flex flex-wrap gap-4 reveal">
+      <a class="btn btn-gold" href="/work/universal-search/">Read the work →</a>
+      <!-- TODO(Vaibhav): drop vaibhav-kumawat-resume.pdf into /public -->
+      <a class="btn btn-ghost" href="/vaibhav-kumawat-resume.pdf" data-goal="resume_download">Download resume (PDF)</a>
+    </div>
+    <dl class="mt-14 grid grid-cols-2 gap-6 md:grid-cols-4 reveal">
+      {chips.map(c => (
+        <div>
+          <dt class="sr-only">{c.label}</dt>
+          <dd class="display" style="font-size:var(--fs-h1); color:var(--gold)" data-count={c.value}>{c.value}</dd>
+          <dd class="muted text-sm mt-1">{c.label}</dd>
+        </div>
+      ))}
+    </dl>
+  </section>
+
+  <!-- WORK -->
+  <section id="work" class="wrap py-16">
+    <p class="eyebrow reveal">Selected work</p>
+    <h2 class="mt-2 reveal" style="font-size:var(--fs-h2)">Case studies, not bullets</h2>
+    <p class="muted mt-2 max-w-2xl reveal">Each one covers the constraints, the failure modes that drove the architecture, what shipped, and what I'd do differently.</p>
+    <div class="mt-10 grid gap-5 md:grid-cols-2">
+      {work.map(w => (
+        <a href={`/work/${w.id}/`} class="card block p-7 reveal" style="color:var(--text-on-ink)">
+          <div class="flex flex-wrap gap-3 text-xs muted" style="font-family:'Inter Variable',sans-serif">
+            <span>{w.data.period}</span><span>·</span><span>{w.data.role}</span>
+          </div>
+          <h3 class="mt-3" style="font-size:var(--fs-h3)">{w.data.title}</h3>
+          <p class="muted mt-2 text-[.95rem]">{w.data.summary}</p>
+          <span class="mt-4 inline-block" style="color:var(--gold)">Read the case study →</span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="wrap py-16">
+    <p class="eyebrow reveal">About</p>
+    <div class="mt-6 grid gap-10 md:grid-cols-[1.4fr_1fr]">
+      <div class="reveal">
+        <p style="font-size:1.15rem">
+          My edge: I think in architecture driven by failure modes. Before a system's happy path, I map how it breaks —
+          stale data, version skew, partial degradation, the tail cases that decide whether users trust a product —
+          and design backward from there.
+        </p>
+        <p class="muted mt-5">
+          Six years as a PM across 0→1 products, scaled consumer surfaces, and platform infrastructure at Paytm —
+          homepage, universal search, storefront backend, frontend SDKs, localization, and accessibility for 100M+ users.
+          Currently focused on AI-native product work: LLM pipelines in production, and building in public on the side.
+        </p>
+      </div>
+      <div class="card p-6 text-sm reveal">
+        <h3 class="eyebrow" style="font-size:.75rem">Facts</h3>
+        <ul class="mt-3 space-y-2 muted">
+          <li><strong style="color:var(--text-on-ink)">Education:</strong> B.Tech, IIT Bombay · MBA, IIM Indore</li>
+          <li><strong style="color:var(--text-on-ink)">Now:</strong> Senior PM, Paytm (Storefront Platform)</li>
+          <li><strong style="color:var(--text-on-ink)">Based in:</strong> Mumbai, India</li>
+          <li><strong style="color:var(--text-on-ink)">Domains:</strong> Search &amp; discovery, platform SDKs, personalization, localization, accessibility, AI/LLM products, fintech</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIMELINE -->
+  <section class="wrap py-16">
+    <p class="eyebrow reveal">Timeline</p>
+    <ol class="mt-8 space-y-8 border-l pl-8" style="border-color:var(--line)">
+      {[
+        ['2022–now', 'Senior Product Manager, Paytm', 'Platform surfaces: homepage, search, SDKs, storefront backend, localization, accessibility.', '/work/sdk-platform/'],
+        ['2021–2022', 'Product Manager, Paytm', 'Universal search 0→1 across 40+ verticals.', '/work/universal-search/'],
+        ['2020–2021', 'Product roles, consumer internet', 'Growth and discovery problems at scale.', null],
+        ['2018–2020', 'MBA, IIM Indore', 'Product strategy foundation.', null],
+        ['2014–2018', 'B.Tech, IIT Bombay', 'Chemical engineering — systems thinking, the hard way.', null],
+      ].map(([period, title, desc, href]) => (
+        <li class="reveal relative">
+          <span class="absolute -left-[2.35rem] top-1.5 h-2.5 w-2.5 rounded-full" style="background:var(--gold)"></span>
+          <p class="text-xs eyebrow">{period}</p>
+          <h3 class="mt-1" style="font-size:var(--fs-h3)">{title}</h3>
+          <p class="muted text-sm mt-1">{desc} {href && <a href={href}>Case study →</a>}</p>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <!-- BUILDING -->
+  <section id="building" class="wrap py-16">
+    <p class="eyebrow reveal">Building</p>
+    <div class="card p-7 mt-6 reveal">
+      <h3 style="font-size:var(--fs-h3)">Find Skills — AI financial manager (in progress)</h3>
+      <p class="muted mt-2 max-w-2xl">
+        A consumer AI product I'm building in public to practice the full loop — strategy to shipped code.
+        Claude as the structured financial engine, a second model for narrative copy. Honest status and notes live on the Now page.
+      </p>
+      <a class="mt-4 inline-block" href="/now" style="color:var(--gold)">See what I'm building now →</a>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="wrap py-16">
+    <p class="eyebrow reveal">Contact</p>
+    <h2 class="mt-2 reveal" style="font-size:var(--fs-h2)">One conversation usually beats ten emails</h2>
+    <div class="mt-8 grid gap-8 md:grid-cols-2">
+      <div class="reveal space-y-3 text-sm">
+        <p><strong>Email:</strong> <a href="mailto:hello@vaibhavkumawat.com">hello@vaibhavkumawat.com</a></p>
+        <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/vaibhav-kumawat" rel="me">/in/vaibhav-kumawat</a></p>
+        <!-- TODO(Vaibhav): create a Cal.com link and replace the href -->
+        <p><strong>Talk:</strong> <a href="https://cal.com/vaibhav-kumawat/20min" data-goal="contact_click">Book 20 minutes →</a></p>
+        <div class="muted pt-4" style="border-top:1px solid var(--line)">
+          <p><strong style="color:var(--text-on-ink)">FAQ.</strong> Open to senior/principal PM roles and advisory in AI-native product, search/discovery, and platform work · Remote-friendly, based in Mumbai (IST) · Best first step: read a case study, then use the call link above.</p>
+        </div>
+      </div>
+      <!-- TODO(Vaibhav): create a free Formspree form, replace YOUR_FORM_ID -->
+      <form class="reveal space-y-4" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <input type="text" name="_gotcha" class="hidden" tabindex="-1" autocomplete="off" />
+        <label class="block text-sm">Name
+          <input required name="name" class="mt-1 w-full rounded-lg p-3" style="background:var(--bg-ink-raised); border:1px solid var(--line); color:var(--text-on-ink)" />
+        </label>
+        <label class="block text-sm">Email
+          <input required type="email" name="email" class="mt-1 w-full rounded-lg p-3" style="background:var(--bg-ink-raised); border:1px solid var(--line); color:var(--text-on-ink)" />
+        </label>
+        <label class="block text-sm">Message
+          <textarea required name="message" rows="4" class="mt-1 w-full rounded-lg p-3" style="background:var(--bg-ink-raised); border:1px solid var(--line); color:var(--text-on-ink)"></textarea>
+        </label>
+        <button type="submit" class="btn btn-gold">Send message</button>
+      </form>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,84 @@
+@import "tailwindcss";
+
+/* ============ Design tokens (Output B of spec) ============ */
+:root {
+  --bg-ink: #0E0D0B;
+  --bg-ink-raised: #171512;
+  --surface-paper: #FAF7F2;
+  --text-on-ink: #EDE8DF;
+  --text-on-ink-muted: #A79F91;
+  --text-on-paper: #1C1A17;
+  --text-on-paper-muted: #5B554B;
+  --gold: #C9A24B;
+  --gold-deep: #8A6B23;
+  --focus-ring: #7FB4FF;
+  --line: rgba(237,232,223,.12);
+
+  --fs-display: clamp(2.5rem, 6vw, 4.5rem);
+  --fs-h1: clamp(2rem, 4vw, 3rem);
+  --fs-h2: clamp(1.5rem, 2.5vw, 2rem);
+  --fs-h3: 1.25rem;
+  --fs-body: 1.0625rem;
+  --fs-small: .875rem;
+
+  --dur-fast: 150ms;
+  --dur-med: 300ms;
+  --dur-reveal: 600ms;
+  --ease-out-quint: cubic-bezier(.22,1,.36,1);
+  --measure: 68ch;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg-ink);
+  color: var(--text-on-ink);
+  font-family: "Inter Variable", system-ui, sans-serif;
+  font-size: var(--fs-body);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+h1,h2,h3,.display { font-family: "Fraunces Variable", Georgia, serif; font-weight: 560; letter-spacing: -0.01em; }
+
+a { color: var(--gold); text-decoration: none; transition: color var(--dur-fast); }
+a:hover { color: var(--text-on-ink); }
+:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; border-radius: 4px; }
+
+.eyebrow { font-size: var(--fs-small); letter-spacing: .14em; text-transform: uppercase; color: var(--gold); font-family: "Inter Variable", sans-serif; font-weight: 600; }
+.muted { color: var(--text-on-ink-muted); }
+.wrap { max-width: 1120px; margin-inline: auto; padding-inline: clamp(1.25rem, 4vw, 2.5rem); }
+.card { background: var(--bg-ink-raised); border: 1px solid var(--line); border-radius: 12px; transition: transform var(--dur-med) var(--ease-out-quint), border-color var(--dur-med); }
+.card:hover { transform: translateY(-4px); border-color: rgba(201,162,75,.4); }
+
+.btn { display:inline-block; padding:.8rem 1.5rem; border-radius:999px; font-weight:600; font-family:"Inter Variable",sans-serif; transition: transform var(--dur-fast), background var(--dur-fast), color var(--dur-fast); }
+.btn:hover { transform: translateY(-2px); }
+.btn-gold { background: var(--gold); color: var(--bg-ink); }
+.btn-gold:hover { background:#d8b563; color: var(--bg-ink); }
+.btn-ghost { border:1px solid var(--line); color: var(--text-on-ink); }
+.btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+
+/* Light reading well for case-study prose (HC-4) */
+.paper { background: var(--surface-paper); color: var(--text-on-paper); }
+.paper a { color: var(--gold-deep); text-decoration: underline; text-underline-offset: 3px; }
+.paper a:hover { color: var(--text-on-paper); }
+.prose { max-width: var(--measure); margin-inline:auto; font-size:1.125rem; }
+.prose h2 { font-size: var(--fs-h2); margin: 2.5em 0 .6em; }
+.prose h2:first-child { margin-top: 0; }
+.prose p, .prose ul, .prose ol { margin-bottom: 1.2em; }
+.prose ul { list-style: disc; padding-left: 1.4em; }
+.prose li { margin-bottom:.4em; }
+.prose strong { font-weight: 650; }
+
+/* Reveal system (HC-7) */
+.reveal { opacity:0; transform: translateY(16px); transition: opacity var(--dur-reveal) var(--ease-out-quint), transform var(--dur-reveal) var(--ease-out-quint); }
+.reveal.in { opacity:1; transform:none; }
+
+/* Signature: hero masked line rise */
+.line-mask { overflow:hidden; display:block; }
+.line-mask > span { display:block; transform: translateY(110%); transition: transform 700ms var(--ease-out-quint); }
+.hero-in .line-mask > span { transform:none; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior:auto; }
+  .reveal, .line-mask > span { opacity:1 !important; transform:none !important; transition:none !important; }
+  * { animation-duration:.01ms !important; transition-duration:.01ms !important; }
+}

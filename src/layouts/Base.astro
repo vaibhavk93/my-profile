@@ -1,0 +1,105 @@
+---
+import '../styles/global.css';
+import '@fontsource-variable/fraunces';
+import '@fontsource-variable/inter';
+
+interface Props { title: string; description: string; type?: string; }
+const { title, description, type = 'website' } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+
+const personLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Vaibhav Kumawat',
+  jobTitle: 'Senior Product Manager',
+  worksFor: { '@type': 'Organization', name: 'Paytm' },
+  alumniOf: [
+    { '@type': 'CollegeOrUniversity', name: 'IIT Bombay' },
+    { '@type': 'CollegeOrUniversity', name: 'IIM Indore' },
+  ],
+  knowsAbout: ['Search & Discovery', 'Platform SDKs', 'AI/LLM Products', 'Localization', 'Personalization', 'Fintech'],
+  url: 'https://vaibhavkumawat.com',
+  sameAs: ['https://www.linkedin.com/in/vaibhav-kumawat'],
+  address: { '@type': 'PostalAddress', addressLocality: 'Mumbai', addressCountry: 'IN' },
+};
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonical} />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="sitemap" href="/sitemap-index.xml" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:type" content={type} />
+  <meta property="og:url" content={canonical} />
+  <meta name="twitter:card" content="summary" />
+  <script type="application/ld+json" set:html={JSON.stringify(personLd)} />
+  <!-- TODO(Vaibhav): create a Plausible account for vaibhavkumawat.com, then this line goes live as-is -->
+  <script defer data-domain="vaibhavkumawat.com" src="https://plausible.io/js/script.js"></script>
+</head>
+<body>
+  <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:bg-[var(--gold)] focus:text-[var(--bg-ink)] focus:px-4 focus:py-2 focus:rounded">Skip to content</a>
+
+  <header class="wrap flex items-center justify-between py-6">
+    <a href="/" class="display text-lg tracking-tight" style="color:var(--text-on-ink)">VK<span style="color:var(--gold)">.</span></a>
+    <nav aria-label="Primary" class="flex gap-5 text-sm md:gap-7" style="font-family:'Inter Variable',sans-serif">
+      <a href="/#work">Work</a>
+      <a href="/#about">About</a>
+      <a href="/now">Now</a>
+      <a href="/#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main id="main"><slot /></main>
+
+  <footer class="wrap py-14 mt-20 text-sm" style="border-top:1px solid var(--line)">
+    <div class="flex flex-wrap gap-x-8 gap-y-3 muted">
+      <span>© {new Date().getFullYear()} Vaibhav Kumawat · Mumbai</span>
+      <a href="https://www.linkedin.com/in/vaibhav-kumawat" rel="me">LinkedIn</a>
+      <a href="/now">Now</a>
+      <a href="/profile.md">For AI agents: machine-readable profile</a>
+      <span>IIT Bombay · IIM Indore · Paytm</span>
+    </div>
+  </footer>
+
+  <script>
+    // Reveal-on-scroll + count-up (tokens per spec Output B)
+    const io = new IntersectionObserver((es) => {
+      es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.2 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const nio = new IntersectionObserver((es) => {
+      es.forEach(e => {
+        if (!e.isIntersecting) return;
+        nio.unobserve(e.target);
+        const el = e.target as HTMLElement;
+        const final = el.dataset.count!;
+        if (reduce) return; // static text already present
+        const num = parseFloat(final.replace(/[^0-9.]/g, ''));
+        const prefix = final.match(/^[^0-9]*/)?.[0] ?? '';
+        const suffix = final.match(/[^0-9.]*$/)?.[0] ?? '';
+        const t0 = performance.now(), D = 900;
+        const tick = (t: number) => {
+          const p = Math.min((t - t0) / D, 1);
+          const eased = 1 - Math.pow(1 - p, 5);
+          const v = num * eased;
+          el.textContent = prefix + (num % 1 ? v.toFixed(1) : Math.round(v)) + suffix;
+          if (p < 1) requestAnimationFrame(tick); else el.textContent = final;
+        };
+        requestAnimationFrame(tick);
+      });
+    }, { threshold: 0.4 });
+    document.querySelectorAll('[data-count]').forEach(el => nio.observe(el));
+
+    // Hero signature reveal
+    requestAnimationFrame(() => document.getElementById('hero')?.classList.add('hero-in'));
+  </script>
+</body>
+</html>

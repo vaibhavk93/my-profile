@@ -1,0 +1,26 @@
+---
+import Base from '../layouts/Base.astro';
+const updated = '2026-07-02'; // TODO(Vaibhav): bump this date whenever you edit this page
+---
+<Base title="Now — Vaibhav Kumawat" description="What Vaibhav Kumawat is building and thinking about right now.">
+  <section class="wrap pt-12 pb-20 max-w-3xl">
+    <p class="eyebrow">Now · Updated {updated}</p>
+    <h1 class="mt-3" style="font-size:var(--fs-h1)">What I'm building</h1>
+
+    <h2 class="mt-12" style="font-size:var(--fs-h2)">Current focus</h2>
+    <p class="muted mt-3">Shipping AI product work end-to-end: production LLM pipelines at Paytm by day, an AI financial manager (Find Skills) nights and weekends, and moving my portfolio from claims to shipped, linkable artifacts.</p>
+
+    <h2 class="mt-10" style="font-size:var(--fs-h2)">In progress</h2>
+    <ul class="mt-3 space-y-3 muted list-disc pl-5">
+      <li><strong style="color:var(--text-on-ink)">Find Skills</strong> — B2C AI financial manager. Status: moving from strategy to technical execution; current open decision is the expense-tracking data model. Claude API as the structured engine.</li>
+      <li><strong style="color:var(--text-on-ink)">Localization Playground</strong> — an interactive demo of the dual-LLM translate/evaluate loop from <a href="/work/ai-localization/">this case study</a>. Status: not started as a public demo; it ships here first when live.</li>
+    </ul>
+
+    <h2 class="mt-10" style="font-size:var(--fs-h2)">Recently shipped</h2>
+    <ul class="mt-3 space-y-2 muted list-disc pl-5">
+      <li>This site — rebuilt on Astro with a machine-readable <a href="/profile.md">profile</a> for AI agents.</li>
+    </ul>
+
+    <p class="mt-12 text-sm muted">This page follows the <a href="https://nownownow.com/about" rel="noopener">/now convention</a>. If it's more than two months stale, call me out.</p>
+  </section>
+</Base>

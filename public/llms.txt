@@ -1,0 +1,15 @@
+# Vaibhav Kumawat
+
+> Senior Product Manager (Paytm) — search, platform SDKs, and AI/LLM products at 100M-user scale. Mumbai. Open to senior/principal AI-native PM roles and advisory.
+
+## Canonical profile
+- [Machine-readable fact sheet](https://vaibhavkumawat.com/profile.md): dated, verifiable claims with context
+
+## Case studies
+- [Universal Search 0→1](https://vaibhavkumawat.com/work/universal-search/)
+- [AI Localization dual-LLM pipeline](https://vaibhavkumawat.com/work/ai-localization/)
+- [SDK Platform, 96% GTM compression](https://vaibhavkumawat.com/work/sdk-platform/)
+- [Homepage engagement & recovery](https://vaibhavkumawat.com/work/homepage-engagement/)
+
+## Current
+- [Now page](https://vaibhavkumawat.com/now): active projects, updated monthly

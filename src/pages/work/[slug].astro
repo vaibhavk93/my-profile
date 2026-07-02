@@ -1,0 +1,59 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const work = await getCollection('work');
+  return work.map(entry => ({ params: { slug: entry.id }, props: { entry } }));
+}
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: entry.data.title,
+  author: { '@type': 'Person', name: 'Vaibhav Kumawat' },
+  dateModified: entry.data.updated,
+  description: entry.data.summary,
+};
+---
+<Base title={`${entry.data.title} — Vaibhav Kumawat`} description={entry.data.summary} type="article">
+  <script type="application/ld+json" set:html={JSON.stringify(articleLd)} />
+  <!-- Layer 1: TL;DR + Layer 2: metrics (dark chrome) -->
+  <section class="wrap pt-12 pb-14">
+    <p class="eyebrow">Case study · {entry.data.period} · Updated {entry.data.updated}</p>
+    <h1 class="mt-3 max-w-3xl" style="font-size:var(--fs-h1); line-height:1.15">{entry.data.title}</h1>
+    <p class="muted mt-4 max-w-2xl" style="font-size:1.1rem">{entry.data.summary}</p>
+    <dl class="mt-10 grid grid-cols-2 gap-6 md:grid-cols-3 max-w-2xl">
+      {entry.data.metrics.map(m => (
+        <div>
+          <dd class="display" style="font-size:var(--fs-h2); color:var(--gold)" data-count={m.value}>{m.value}</dd>
+          <dt class="muted text-sm mt-1">{m.label}</dt>
+        </div>
+      ))}
+    </dl>
+  </section>
+  <!-- Layer 3: depth on the light reading well (HC-4) -->
+  <article class="paper py-16">
+    <div class="wrap prose">
+      <Content />
+      <p class="mt-12 text-sm" style="color:var(--text-on-paper-muted)">
+        Metrics are self-reported from internal dashboards. Happy to walk through methodology —
+        <a href="/#contact">get in touch</a>.
+      </p>
+    </div>
+  </article>
+  <section class="wrap py-12">
+    <a href="/#work" class="btn btn-ghost">← All case studies</a>
+  </section>
+
+  <script>
+    // case_study_read goal at 60% scroll (fires once)
+    let fired = false;
+    addEventListener('scroll', () => {
+      if (fired) return;
+      const p = (scrollY + innerHeight) / document.body.scrollHeight;
+      if (p > 0.6) { fired = true; (window as any).plausible?.('case_study_read'); }
+    }, { passive: true });
+  </script>
+</Base>
